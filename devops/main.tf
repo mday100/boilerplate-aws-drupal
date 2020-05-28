@@ -1,5 +1,5 @@
 # Creates a new instance of the latest Ubuntu 18.04 on
-# t2.micro node installing docker with an AWS Tag "DEV"
+# t2.micro node installing Docksal with an AWS Tag "DEV"
 # FOR DEVELOPMENT AND DEMO USE ONLY DUE TO NO SECURITY
 
 provider "aws" {
@@ -23,7 +23,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_key_pair" "terraform" {
-  key_name   = "terraform-key"
+  key_name   = "my-public-key"
   public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
@@ -31,13 +31,9 @@ resource "aws_instance" "web" {
   ami             = "${data.aws_ami.ubuntu.id}"
   instance_type   = "t2.micro"
   security_groups = ["Wide Open"]
-  key_name        = "terraform-key"
+  key_name        = "my-public-key"
 
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo apt-get update
-    sudo apt-get install docker
-    EOF
+  user_data = "${file("./vm_init.sh")}"
 
   tags = {
     Name = "DEV"

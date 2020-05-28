@@ -1,8 +1,9 @@
 #!/bin/bash
 
+# deploy main.tf if terraform is installed
 if [[ $(terraform) ]]; then
 	mkdir ~/terraform
-	cp main.tf ~/terraform
+	cp main.tf vm_init.sh ~/terraform
 	cd ~/terraform
 	terraform init
 	terraform validate
