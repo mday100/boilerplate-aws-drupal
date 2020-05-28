@@ -5,29 +5,29 @@ jobs:
   build:
     docker:
       - image: docksal/cli
-	steps:
-	  - checkout
-	  - run:
-	      name: "Testing"
-		  command: echo "Testing 1 2 3"
+    steps:
+      - checkout
+      - run:
+          name: "Testing"
+          command: echo "Testing 1 2 3"
 
   deploy:
     docker:
       - image: docksal/cli
-	steps:
-	  - checkout
-	  - run:
-	      name: "Testing"
-		  command: echo "Testing 1 2 3"
+    steps:
+      - checkout
+      - run:
+          name: "Testing"
+          command: echo "Testing 1 2 3"
 
 workflows:
   main:
     jobs:
       - build
-	  - deploy:
-	      requires:
-		    - build
-		  filters:
-		    branches:
-			  only:
-			  - master
+      - deploy:
+          requires:
+          - build
+          filters:
+            branches:
+              only:
+                - master
