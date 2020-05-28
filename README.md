@@ -37,4 +37,4 @@ From your terminal, go to the directory where you have cloned the repo and enter
 ```
 cd devops
 ./create_repo.sh
-```# boilerplate-aws-drupal
+```
