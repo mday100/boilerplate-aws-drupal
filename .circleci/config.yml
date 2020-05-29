@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: /home/agent/build
     docker:
-      - image: docksal/ci-agent:php
+      - image: docksal/ci-agent
     steps:
       - run:
           name: Configure agent environment
@@ -17,7 +17,7 @@ jobs:
 
   deploy:
     docker:
-      - image: docksal/cli
+      - image: docksal/ci-agent:php
     steps:
       - checkout
       - run:
