@@ -3,7 +3,7 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: /home/agent/build
+    working_directory: /home/agent/ci-agent:php
     docker:
       - image: docksal/ci-agent
     steps:
@@ -13,7 +13,9 @@ jobs:
       - checkout
       - run:
           name: Build sandbox
-          command: sandbox-init
+          command: |
+		    build-init
+			build-exex "fin init"
 
   deploy:
     docker:
