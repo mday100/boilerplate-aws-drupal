@@ -10,9 +10,6 @@ jobs:
       - run:
           name: Configure agent environment
           command: echo 'source build-env' >> $BASH_ENV
-      - run:
-          name: Configure agent to local host
-          command: fin drush status
       - checkout
       - run:
           name: Build sandbox
