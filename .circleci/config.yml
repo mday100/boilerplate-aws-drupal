@@ -14,8 +14,8 @@ jobs:
       - run:
           name: Build sandbox
           command: |
-		    build-init
-			build-exex "fin init"
+            build-init
+            build-exex "fin init"
 
   deploy:
     docker:
