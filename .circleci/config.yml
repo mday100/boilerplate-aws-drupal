@@ -3,13 +3,17 @@ version: 2.1
 
 jobs:
   build:
+    working_directory: /home/agent/build
     docker:
-      - image: docksal/cli
+      - image: docksal/ci-agent:php
     steps:
+      - run:
+          name: Configure agent environment
+          command: echo 'source build-env' >> $BASH_ENV
       - checkout
       - run:
-          name: "Testing"
-          command: echo "Testing 1 2 3"
+          name: Build sandbox
+          command: sandbox-init
 
   deploy:
     docker:
