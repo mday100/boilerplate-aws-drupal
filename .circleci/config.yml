@@ -12,7 +12,7 @@ jobs:
           command: echo 'source build-env' >> $BASH_ENV
       - run:
           name: Configure agent to local host
-          command: echo '127.0.0.1 localhost' >> /etc/hosts
+          command: fin drush status
       - checkout
       - run:
           name: Build sandbox
