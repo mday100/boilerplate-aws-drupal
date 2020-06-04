@@ -24,8 +24,9 @@ orbs:
 workflows:
   main:
     jobs:
-      - build
-          - context: SonarCloud
+      - build:
+          context:
+          - SonarCloud
       - deploy:
           requires:
           - build
