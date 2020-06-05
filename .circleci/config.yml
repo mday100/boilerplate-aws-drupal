@@ -29,8 +29,8 @@ workflows:
       - deploy:
           requires:
           - build
+          - vulnachecka/scan
           filters:
             branches:
               only:
                 - master
-      - vulnachecka/scan
