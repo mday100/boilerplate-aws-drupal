@@ -13,12 +13,15 @@ jobs:
       - image: docksal/cli
     steps:
       - checkout
+      - vulnachecka/scan
       - run:
           name: "Testing"
           command: echo "Testing 1 2 3"
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
+orbs:
+  vulnachecka: whitesource/vulnerability-checker@19.5.5
 
 workflows:
   main:
