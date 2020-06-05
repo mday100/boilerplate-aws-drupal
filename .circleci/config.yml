@@ -17,10 +17,11 @@ jobs:
     steps:
       - add_ssh_keys
       - run:
+          name: Echo Vars
+          command: echo $SSH_USER
+      - run:
           name: Deploy Over SSH
           command: |
-            echo $SSH_USER
-            echo $SSH_HOST
             ssh $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && fin status"
 
 workflows:
