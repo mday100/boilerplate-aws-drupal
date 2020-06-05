@@ -13,7 +13,7 @@ jobs:
 
   deploy:
     docker:
-      - image: docksal/cli
+      - image: docksal/ssh-agent
     steps:
       - add_ssh_keys
       - run:
