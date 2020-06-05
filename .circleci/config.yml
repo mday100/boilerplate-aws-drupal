@@ -17,6 +17,10 @@ jobs:
     steps:
       - add_ssh_keys
       - run:
+          name: SSH Keyscan
+          command: |
+            ssh -vvv $SSH_USER@$SSH_HOST "ssh-keyscan $SSH_HOST"
+      - run:
           name: Deploy Over SSH
           command: |
             ssh -vvv $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && fin status"
