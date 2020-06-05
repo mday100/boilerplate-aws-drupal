@@ -21,9 +21,13 @@ jobs:
           command: |
             ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
       - run:
-          name: Deploy Over SSH
+          name: Get the latest code 
           command: |
-            ssh -vvv $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && fin status"
+            ssh -v $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && git pull"
+      - run:
+          name: Clear cache and show the status
+          command: |
+            ssh -v $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && fin drush cr && fin status"
 
 workflows:
   main:
