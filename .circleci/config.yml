@@ -34,13 +34,14 @@ workflows:
     jobs:
       - build:
           context: SonarCloud
+      - vulnachecka/scan:
+          requires:
+          - build
       - deploy:
           requires:
           - build
+          - vulnachecka/scan
           filters:
             branches:
               only:
                 - master
-      - vulnachecka/scan:
-          requires:
-          - build
