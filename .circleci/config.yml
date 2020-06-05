@@ -13,7 +13,6 @@ jobs:
       - image: docksal/cli
     steps:
       - checkout
-      - vulnachecka/scan
       - run:
           name: "Testing"
           command: echo "Testing 1 2 3"
@@ -34,3 +33,4 @@ workflows:
             branches:
               only:
                 - master
+      - vulnachecka/scan
