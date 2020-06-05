@@ -20,7 +20,6 @@ jobs:
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
-orbs:
   vulnachecka: whitesource/vulnerability-checker@19.5.5
 
 workflows:
