@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+  vulnachecka: whitesource/vulnerability-checker@19.5.5
 
 jobs:
   build:
@@ -14,12 +17,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Testing"
-          command: echo "Testing 1 2 3"
-
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.1
-  vulnachecka: whitesource/vulnerability-checker@19.5.5
+          name: Deploy Over SSH
+          command: |
+             ssh $SSH_USER@$SSH_HOST
+             echo "Hello from the server!"
 
 workflows:
   main:
@@ -27,12 +28,12 @@ workflows:
       - build:
           context: SonarCloud
       - deploy:
-          requires:
-          - build
-          filters:
-            branches:
-              only:
-                - master
-      - vulnachecka/scan:
-          requires:
-          - build
+          #requires:
+          #- build
+          #filters:
+          #  branches:
+          #    only:
+          #      - master
+     # - vulnachecka/scan:
+     #     requires:
+     #     - build
