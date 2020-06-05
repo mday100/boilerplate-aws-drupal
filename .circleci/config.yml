@@ -1,5 +1,7 @@
-# https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+  vulnachecka: whitesource/vulnerability-checker@19.5.5
 
 jobs:
   build:
@@ -7,23 +9,31 @@ jobs:
       - image: docksal/cli
     steps:
       - checkout
-      - run:
-          name: "Testing"
-          command: echo "Testing 1 2 3"
+      - sonarcloud/scan
 
   deploy:
     docker:
-      - image: docksal/cli
+      - image: docksal/ssh-agent
     steps:
-      - checkout
+      - add_ssh_keys
       - run:
-          name: "Testing"
-          command: echo "Testing 1 2 3"
+          name: Add the keys to the known hosts
+          command: |
+            ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+      - run:
+          name: Get the latest code 
+          command: |
+            ssh -v $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && git pull"
+      - run:
+          name: Clear cache and show the status
+          command: |
+            ssh -v $SSH_USER@$SSH_HOST "cd boilerplate-drupal8 && fin drush cr && fin status"
 
 workflows:
   main:
     jobs:
-      - build
+      - build:
+          context: SonarCloud
       - deploy:
           requires:
           - build
@@ -31,3 +41,6 @@ workflows:
             branches:
               only:
                 - master
+      - vulnachecka/scan:
+          requires:
+          - build
