@@ -1,0 +1,71 @@
+{#  https://api.drupal.org/api/drupal/core!modules!system!templates!menu.html.twig/8
+    menu_name: The machine name of the menu.
+    items: A nested list of menu items. Each menu item contains:
+      attributes: HTML attributes for the menu item.
+      below: The menu item child items.
+      title: The menu link title.
+      url: The menu link url, instance of \Drupal\Core\Url
+      localized_options: Menu link localized options.
+#}
+<nav class="navbar navbar-expand-lg">
+ <a class="navbar-brand" href="#">&nbsp;</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    MENU
+  </button>
+{# All menu and submenu items #}
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    	<ul class="navbar-nav mr-auto">
+    
+    		{% for item in items %}
+    
+    			{# Menu with submenu #}
+     
+    			{% if item.below %}
+    
+    				<li  class="nav-item dropdown" >
+    					
+                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}</a>
+                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          
+    					
+    						{# Menu -> Submenu #}
+    
+    						{% for item in item.below %}
+    						    {% if item.title =="Repayment" or item.title =="ESSA"  %}
+    						    <a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a>
+    						    {% else %}
+                                   <a class="dropdown-item" href="#">{{ item.title }}</a>
+                                {% endif %}
+                                
+    							
+    
+    						{% endfor %}
+    					
+    					</div>
+    				</li>
+    				{# Menu without submenu #}
+    
+    			{% else %}
+    
+    				{# Menu - Link #}
+    
+    				<li class="nav-item"><a  href="{{ item.url }}"  {{ item.attributes }} > {{ item.title }}</a></li>
+    
+    			{% endif %}
+    
+    		{% endfor %}
+
+    	</ul>
+    	<form action="/search/node" method="get" id="search-block-form" accept-charset="UTF-8">
+          <div class="js-form-item form-item js-form-type-search form-type-search js-form-item-keys form-item-keys form-no-label">
+              <label for="edit-keys" class="visually-hidden">Search</label>
+                <input title="Enter the terms you wish to search for." data-drupal-selector="edit-keys" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" class="form-search">
+        
+                </div>
+        <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions"><input data-drupal-selector="edit-submit" type="image" id="edit-submit" name="op" src="/themes/custom/us_education/images/search.png" class="image-button js-form-submit form-submit">
+        </div>
+        
+        </form>
+
+</div>
+</nav>

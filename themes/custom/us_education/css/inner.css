@@ -1,0 +1,78 @@
+.news-banner {
+    background: url(../images/news.png);
+    background-position: center;
+}
+.news-banner h2 {
+    font-size: 30px;
+    line-height: 35px;
+    color:#fff;
+}
+#block-news-content {
+    padding: 40px 0px;
+}
+
+@media (max-width: 767px) {
+   .news.Mobile .btn-link:hover{
+    color: #fff;
+    text-decoration: none;
+} 
+.news.Mobile .btn.focus, .news.Mobile .btn:focus {
+   
+    box-shadow: 0 0 0 0rem rgba(0,123,255,.25);
+}
+
+.news.Mobile button.collapsed::after{
+     display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f067";
+    border: none;
+    float: right;
+    padding-top: 5px;
+}
+
+.news.Mobile button:not(.collapsed)::after{
+     display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f068";
+    border: none;
+    float: right;
+    padding-top: 5px;
+}
+
+.region-featured-green {
+    background: #fff;
+    padding: 0px;
+}
+
+.region-featured-green a {
+    color: #565C65;
+}
+
+.region-featured-green .title {
+    color: #062545;
+}
+
+
+.region-featured-green p {
+    color: #18759F;
+}
+
+.region-featured-green span a {
+    color: #062545;
+}
+.region-featured-green h4 a {
+    color: #565C65;
+}
+.content-section.news-page {
+    padding: 1px 0px 8px !important;
+}
+
+}

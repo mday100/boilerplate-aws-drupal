@@ -1,0 +1,63 @@
+{#  https://api.drupal.org/api/drupal/core!modules!system!templates!menu.html.twig/8
+    menu_name: The machine name of the menu.
+    items: A nested list of menu items. Each menu item contains:
+      attributes: HTML attributes for the menu item.
+      below: The menu item child items.
+      title: The menu link title.
+      url: The menu link url, instance of \Drupal\Core\Url
+      localized_options: Menu link localized options.
+#}
+
+ <a class="navbar-brand" href="#">&nbsp;</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+{# All menu and submenu items #}
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    	<ul class="navbar-nav mr-auto">
+    
+    		{% for item in items %}
+    
+    			{# Menu with submenu #}
+     
+    			{% if item.below %}
+    
+    				<li  class="nav-item {{ item.attributes }}" >
+    					<a href="{{ item.url }}"> {{ item.title }} <b class="caret"></b> </a>
+                        
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          {% for item in item.below %}
+    
+    							<a class="dropdown-item" href="{{ item.url }}" {{ item.attributes }} > {{ item.title }} </a>
+    
+    					  {% endfor %}    
+                          
+                        </div>
+    					<ul>
+    						{# Menu -> Submenu #}
+    
+    						{% for item in item.below %}
+    
+    							<li ><a href="{{ item.url }}" {{ item.attributes }} > {{ item.title }} </a></li>
+    
+    						{% endfor %}
+    					</ul>
+    				</li>
+    				{# Menu without submenu #}
+    
+    			{% else %}
+    
+    				{# Menu - Link #}
+    
+    				<li {{ item.attributes }} ><a  href="{{ item.url }}"  {{ item.attributes }} > {{ item.title }}</a></li>
+    
+    			{% endif %}
+    
+    		{% endfor %}
+
+    	</ul>
+	    <div class="col-lg-3 col-md-3 hidden-sm">
+		    {{ page.search }}
+	    </div>
+</div>
+
